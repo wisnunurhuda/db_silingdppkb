@@ -12,4 +12,8 @@ try {
 } catch (PDOException $e) {
     echo "Koneksi Database Gagal: " . $e->getMessage();
 }
+$conn = mysqli_connect($host, $user, $pass, $db, $port);
+if (!$conn) {
+    die("Koneksi MySQLi Gagal: " . mysqli_connect_error());
+}
 ?>
