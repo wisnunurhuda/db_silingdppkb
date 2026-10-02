@@ -2,7 +2,27 @@
 session_start();
 include "koneksi.php";
 
+// Buat tabel users otomatis jika belum ada di Railway
+mysqli_query($conn, "CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role enum('admin','kader') NOT NULL,
+    kode_wilayah VARCHAR(50) DEFAULT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)");
+
+// Masukkan data akun default jika tabel masih kosong
+$cek_user = mysqli_query($conn, "SELECT * FROM users LIMIT 1");
+if (mysqli_num_rows($cek_user) == 0) {
+    mysqli_query($conn, "INSERT INTO users (id, nama, username, password, role, kode_wilayah) VALUES 
+    (1, 'Administrator DPPKB', 'admin', '\$2y\$10\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'KAB_TANGERANG'),
+    (9, 'Kader Kronjo', '360307_KRONJO', '\$2y\$10\$DTWccYVe6YTZYMqEjsEKoO0.NN.YtlsqE6CGWtTCHXVbGRrv2P8e.', 'kader', 'Kronjo')");
+}
+
 $error = "";
+if (isset($_POST['login'])) {
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
