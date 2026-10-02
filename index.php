@@ -54,7 +54,7 @@ if (password_verify($password, $row['password'])) {
             <div class="card card-login p-4">
                 <div class="text-center mb-3">
                     <!-- Pastikan file logo.png sudah ada di folder proyek -->
-                    <img src="asset/logo.png" class="rounded-circle mb-2" width="70" height="70" alt="Logo">
+                    <img src="./asset/logo.png" class="rounded-circle mb-2" width="70" height="70" alt="Logo">
                     <h3 class="fw-bold">SILINGS</h3>
                     <p class="text-muted" style="font-size: 13px;">Sistem Informasi Lingkup Keluarga Resiko Stunting</p>
                 </div>
