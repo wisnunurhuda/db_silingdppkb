@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 include "koneksi.php";
 
-// 1. Buat tabel users otomatis jika belum ada
+// Buat tabel users otomatis jika belum ada di database
 mysqli_query($conn, "CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nama VARCHAR(100) NOT NULL,
@@ -16,7 +16,7 @@ mysqli_query($conn, "CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )");
 
-// 2. Masukkan akun default jika tabel kosong
+// Masukkan akun default jika tabel kosong
 $cek = mysqli_query($conn, "SELECT * FROM users LIMIT 1");
 if ($cek && mysqli_num_rows($cek) == 0) {
     mysqli_query($conn, "INSERT INTO users (id, nama, username, password, role, kode_wilayah) VALUES 
